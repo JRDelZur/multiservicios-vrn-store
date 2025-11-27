@@ -1,0 +1,551 @@
+/* =========================================
+   1. IMPORTACIÓN DE FUENTES & RESET
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+* {
+    box-sizing: border-box; /* Vital para que los tamaños no se rompan */
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================================
+   2. VARIABLES GLOBALES (El ADN del diseño)
+   ========================================= */
+:root {
+    /* Paleta de Colores */
+    --color-primario: #0F172A; /* Azul muy oscuro (Header/Footer/Botones) */
+    --color-acento: #3B82F6;   /* Azul brillante (Enlaces/Acentos) */
+    --color-fondo: #F8FAFC;    /* Gris muy claro (Fondo general) */
+    --color-tarjeta: #FFFFFF;  /* Blanco (Tarjetas) */
+    --color-texto: #334155;    /* Gris oscuro (Párrafos) */
+    --color-exito: #10B981;    /* Verde (Éxito) */
+
+    /* Efectos */
+    --sombra-suave: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --sombra-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radio-borde: 12px;
+}
+
+/* =========================================
+   3. ESTILOS GENERALES
+   ========================================= */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1, h3 {
+    color: var(--color-primario);
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+    color: var(--color-primario);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Contenedor principal para centrar contenido */
+main {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 4rem; /* Padding horizontal grande para dar aire */
+}
+
+main section {
+    margin-bottom: 5rem; /* Espacio grande entre secciones */
+    padding-top: 2rem;
+}
+
+/* =========================================
+   4. ENCABEZADO (HEADER) Y NAVEGACIÓN
+   ========================================= */
+header {
+    background-color: var(--color-primario);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: var(--sombra-suave);
+}
+
+header h1 {
+    color: white;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #cbd5e1;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--color-acento);
+}
+
+/* =========================================
+   5. TARJETAS DE PRODUCTO (GRID)
+   ========================================= */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.product-card {
+    background: var(--color-tarjeta);
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-suave);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-hover);
+}
+
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #eee;
+}
+
+.product-card-content {
+    /* SOLUCIÓN FINAL AL PROBLEMA DE ESPACIADO CRAMPEADO */
+    padding: 1.5rem 3rem; 
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card-content p {
+    font-size: .95rem;
+    margin-bottom: 1.5rem; /* Menos espacio para hacer la tarjeta compacta */
+    color: var(--color-texto);
+    line-height: 1.5;
+}
+
+.product-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--color-primario);
+}
+
+/* =========================================
+   6. BOTONES MODERNOS
+   ========================================= */
+.btn-comprar, .card-button {
+    background-color: var(--color-primario);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+    display: inline-block;
+    text-align: center;
+    margin-top: auto;
+}
+
+.btn-comprar:hover, .card-button:hover {
+    background-color: var(--color-acento);
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-comprar:active {
+    transform: scale(0.98);
+}
+
+.btn-comprar:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* =========================================
+   7. PIE DE PÁGINA (FOOTER)
+   ========================================= */
+footer {
+    background-color: var(--color-primario);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: auto;
+}
+
+footer a {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* =========================================
+   8. RESPONSIVE (CELULARES)
+   ========================================= */
+@media (max-width: 768px) {
+    header {
+        text-align: center;
+    }
+    
+    nav ul {
+        justify-content: center;
+        padding: 0;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+}
+
+/* =========================================
+   9. ESTILOS PARA LA SECCIÓN HERO/LANDING
+   ========================================= */
+.hero-section {
+    padding: 6rem 2rem;
+    text-align: center;
+    background-color: var(--color-tarjeta);
+    margin-bottom: 2rem;
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-suave);
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-primario);
+}
+
+.hero-section p {
+    font-size: 1.25rem;
+    color: var(--color-texto);
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+}
+
+.hero-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-btn {
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.hero-btn.primary {
+    background-color: var(--color-primario);
+    color: white;
+}
+
+.hero-btn.primary:hover {
+    background-color: var(--color-acento);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-suave);
+}
+
+.hero-btn.secondary {
+    background-color: transparent;
+    border: 2px solid var(--color-acento);
+    color: var(--color-acento);
+}
+
+.hero-btn.secondary:hover {
+    background-color: var(--color-acento);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-suave);
+}
+
+@media (max-width: 600px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* =========================================
+   10. ESTILOS PARA LA SECCIÓN CTA FINAL
+   ========================================= */
+.cta-final {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: var(--color-tarjeta);
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-suave);
+}
+
+.cta-final h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-acento);
+}
+
+.cta-final p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--color-primario);
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radio-borde);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-field:focus {
+    border-color: var(--color-acento);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    outline: none;
+}
+
+textarea.input-field {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.btn-comprar {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+/* src/styles/global.css (AGREGAR ESTO AL FINAL) */
+
+/* === ESTILOS DEL HEADER (SOLUCIÓN FINAL) === */
+
+.header-content-container {
+    display: flex;
+    justify-content: space-between; /* Separa el logo y el menú a los extremos */
+    align-items: center;
+    height: 48px; /* Altura definida */
+}
+
+.main-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* El espacio grande entre los enlaces */
+}
+
+.main-nav-links .nav-link {
+    color: white;
+    padding: 0.5rem 0;
+    transition: color 0.3s;
+}
+
+.nav-separator {
+    color: #64748b; /* Gris sutil */
+    margin: 0 0.5rem;
+}
+
+.cart-button-icon {
+    position: relative;
+    padding: 8px;
+    background-color: #1e293b; /* Un poco más oscuro que el header */
+    border-radius: 9999px; /* Totalmente redondo */
+    border: none;
+    cursor: pointer;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ef4444; /* Rojo */
+    color: white;
+    font-size: 0.75rem;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+}
+
+/* 1. Definir la animación de deslizamiento (ya lo teníamos, lo repetimos por si acaso) */
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+/* 2. Estilo del Panel del Carrito */
+.cart-modal-panel {
+    /* La clase 'animate-slideIn' debe estar en el div principal del modal */
+    animation: slideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
+    
+    background-color: var(--color-fondo); /* Fondo gris claro */
+    box-shadow: var(--sombra-hover);
+    padding: 2.5rem 1.5rem; /* Espaciado interno */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.cart-header-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-primario);
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* 3. Estilo de Ítem Individual del Carrito */
+.cart-item-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--color-tarjeta); /* Blanco */
+    border-radius: var(--radio-borde);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.cart-item-name {
+    font-weight: 600;
+    color: var(--color-primario);
+}
+
+.cart-item-price {
+    font-weight: bold;
+    color: var(--color-acento); /* Azul brillante para el precio */
+    font-size: 1rem;
+}
+
+.cart-item-remove-btn {
+    background: none;
+    border: none;
+    color: #ef4444; /* Rojo */
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: opacity 0.2s;
+}
+
+.cart-item-remove-btn:hover {
+    opacity: 0.7;
+}
+
+/* 4. Estilo del Footer del Carrito (Total y Botón) */
+.cart-total-container {
+    border-top: 2px solid #e5e7eb;
+    padding-top: 1.5rem;
+    margin-top: auto; /* Empuja el total hasta el fondo */
+}
+
+.cart-total-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primario);
+}
+
+.modal-close-button {
+    background-color: transparent; /* Fondo transparente */
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem; /* Hace la '×' más grande */
+    font-weight: bold;
+    color: var(--color-texto); /* Color del texto (Gris oscuro) */
+    padding: 0.5rem;
+    border-radius: 50%; /* Redondeado total para el hover */
+    line-height: 1; 
+    transition: background-color 0.2s, color 0.2s;
+    /* Ajuste de posición que ya debe estar en tu JSX, pero lo incluimos para claridad */
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.modal-close-button:hover {
+    background-color: #e5e5e5; /* Fondo muy claro al pasar el mouse */
+    color: #ef4444; /* Rojo suave al pasar el mouse */
+}
+
+.footer-link-item {
+    color: #6B7280; /* Color blanco para los enlaces */
+    text-decoration: none; /* Sin subrayado por defecto */
+    font-size: 0.9rem; /* Un poco más pequeño que el texto de copyright */
+    transition: color 0.3s ease;
+}
+
+.footer-link-item:hover {
+    color: var(--color-acento); /* Color acento al pasar el mouse */
+}
+
+.footer-separator {
+    color: #6B7280; /* Un gris más oscuro para el separador */
+    margin: 0 0.5rem; /* Espacio alrededor del separador */
+    font-size: 0.9rem;
+}
