@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <>
       <header className="bg-gray-800 text-white p-4 shadow-md sticky top-0 z-40">
-        {/* Usamos el container para centrar y flex-justify para separar extremos */}
+        {/* Usamos el container para centrar y la clase header-content-container para alinear extremos */}
         <div className="container mx-auto header-content-container"> 
           
           {/* 1. LOGO A LA IZQUIERDA */}
@@ -25,7 +25,7 @@ export default function Header() {
           {/* 2. NAVEGACIÓN Y CARRITO */}
           <nav className="main-nav-links">
             
-            {/* Links de navegación */}
+            {/* Links de navegación separados por CSS gap */}
             <Link href="/"><span className="nav-link">Inicio</span></Link>
             <Link href="/store"><span className="nav-link">Tienda</span></Link>
             <Link href="/contact"><span className="nav-link">Contacto</span></Link>
