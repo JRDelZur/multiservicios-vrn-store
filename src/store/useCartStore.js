@@ -12,7 +12,6 @@ export const useCartStore = create(
         
         if (!exists) {
           set({ cart: [...cart, product] });
-          // Puedes reemplazar este alert con un Toast más elegante en producción
           alert("¡Producto agregado al carrito!"); 
         } else {
           alert("Este producto ya está en tu carrito.");

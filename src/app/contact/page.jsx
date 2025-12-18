@@ -1,80 +1,109 @@
 // src/app/contacto/page.jsx
-'use client'; 
-import Link from 'next/link';
+'use client';
+import { useState } from 'react';
 
-export default function ContactoPage() {
+export default function ContactPage() {
+  const [formData, setFormData] = useState({ nombre: '', email: '', mensaje: '' });
+  const [status, setStatus] = useState('idle'); // idle | loading | success | error
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('loading');
+
+    try {
+      const response = await fetch('https://backendvrn.onrender.com/enviar-contacto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ nombre: '', email: '', mensaje: '' }); // Limpiar form
+        alert("¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.");
+      } else {
+        setStatus('error');
+        alert("Hubo un error al enviar el mensaje. Intenta nuevamente.");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus('error');
+      alert("Error de conexión. Revisa tu internet.");
+    }
+  };
+
   return (
-    <section className="py-8 px-4 max-w-4xl mx-auto"> 
-      
-      <h1>Contacto y Soporte</h1>
-      <p className="text-lg mb-8 text-center text-gray-600">
-        ¿Tienes dudas sobre un recurso digital o necesitas soporte técnico urgente? Escríbenos directamente.
-      </p>
+    <section className="py-12 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">Contacto y Soporte</h1>
+        
+        <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+          <h2 className="text-2xl font-bold mb-6 text-gray-800">Envía un Mensaje</h2>
 
-      <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-        <h2>Envía un Mensaje</h2>
+          <form onSubmit={handleSubmit} className="space-y-6">
+              
+              {/* Campo Nombre */}
+              <div className="form-group">
+                  <label htmlFor="nombre">Nombre Completo</label>
+                  <input 
+                      type="text" 
+                      id="nombre" 
+                      name="nombre" 
+                      value={formData.nombre}
+                      onChange={handleChange}
+                      required 
+                      className="input-field" 
+                      placeholder="Tu nombre aquí"
+                  />
+              </div>
 
-        {/* NOTA: Reemplaza el 'action' y 'method' con la lógica de envío de tu formulario (ej. Formspree o tu propia API) */}
-        <form 
-            action="/api/submit-contact" // Ejemplo de una ruta API en Next.js
-            method="POST" 
-            className="space-y-6"
-        >
-            
-            {/* Campo Nombre */}
-            <div className='form-group'>
-                <label htmlFor="nombre" /*className="block text-sm font-medium text-gray-700 mb-1"*/>Nombre Completo</label>
-                <input 
-                    type="text" 
-                    id="nombre" 
-                    name="nombre" 
-                    required 
-                    className="input-field" 
-                />
-            </div>
+              {/* Campo Correo */}
+              <div className="form-group">
+                  <label htmlFor="email">Correo Electrónico</label>
+                  <input 
+                      type="email" 
+                      id="email" 
+                      name="email" 
+                      value={formData.email}
+                      onChange={handleChange}
+                      required 
+                      className="input-field" 
+                      placeholder="tucorreo@ejemplo.com"
+                  />
+              </div>
 
-            {/* Campo Correo */}
-            <div className='form-group'>
-                <label htmlFor="email" /*className="block text-sm font-medium text-gray-700 mb-1"*/>Correo Electrónico</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    required 
-                    className="input-field" 
-                />
-            </div>
+              {/* Campo Mensaje */}
+              <div className="form-group">
+                  <label htmlFor="mensaje">Tu Consulta</label>
+                  <textarea 
+                      id="mensaje" 
+                      name="mensaje" 
+                      value={formData.mensaje}
+                      onChange={handleChange}
+                      rows="4" 
+                      required 
+                      className="input-field"
+                      placeholder="¿En qué podemos ayudarte?"
+                  ></textarea>
+              </div>
 
-            {/* Campo Mensaje */}
-            <div className='form-group'>
-                <label htmlFor="mensaje" /*className="block text-sm font-medium text-gray-700 mb-1"*/>Tu Consulta</label>
-                <textarea 
-                    id="mensaje" 
-                    name="mensaje" 
-                    rows="4" 
-                    required 
-                    className="input-field"
-                ></textarea>
-            </div>
-
-            {/* Botón de Envío (usando la clase de botón principal que ya definimos) */}
-            <div>
-                <button type="submit" className="btn-comprar">
-                    Enviar Consulta
-                </button>
-            </div>
-        </form>
-
+              {/* Botón de Envío */}
+              <div>
+                  <button 
+                    type="submit" 
+                    className="btn-comprar w-full"
+                    disabled={status === 'loading'}
+                  >
+                      {status === 'loading' ? 'ENVIANDO...' : 'ENVIAR CONSULTA'}
+                  </button>
+              </div>
+          </form>
+        </div>
       </div>
-
-      {/* Información de Contacto Adicional */}
-      {/* <div className="mt-10 text-center">
-        <h3 className="text-xl font-semibold mb-3">O Contáctanos Directamente</h3>
-        <p className="text-gray-700">
-            **WhatsApp/Teléfono:** +52 443 XXX XX XX (Soporte Rápido)<br />
-            **Correo Electrónico:** contacto@multiserviciosvrn.com
-        </p>
-      </div> */}
     </section>
   );
 }

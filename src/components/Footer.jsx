@@ -1,9 +1,8 @@
-// src/components/Footer.jsx (REEMPLAZAR TODO)
+// src/components/Footer.jsx 
 import Link from 'next/link';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear(); // Obtiene el año actual dinámicamente
-
+  const currentYear = new Date().getFullYear(); 
   return (
     <footer className="bg-gray-800 text-white p-6 mt-12">
       <div className="container mx-auto text-center">
@@ -12,12 +11,11 @@ export default function Footer() {
           &copy; {currentYear} Multiservicios VRN. Todos los derechos reservados.
         </p>
 
-        {/* Links de Navegación Legal y Contacto con separadores */}
-        <div className="flex justify-center items-center space-x-2"> {/* Reduce space-x para los separadores */}
+        <div className="flex justify-center items-center space-x-2"> 
             <Link href="/legales#terminos">
                 <span className="footer-link-item">Terminos y condiciones</span>
             </Link>
-            <span className="footer-separator">|</span> {/* Separador */}
+            <span className="footer-separator">|</span>
             <Link href="/legales#privacidad">
                 <span className="footer-link-item">Aviso de privacidad</span>
             </Link>

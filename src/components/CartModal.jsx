@@ -1,7 +1,7 @@
-// src/components/CartModal.jsx (CÓDIGO CORREGIDO PARA MOSTRAR TODOS LOS PRODUCTOS)
+// src/components/CartModal.jsx 
 'use client';
 import { useCartStore } from '../store/useCartStore';
-import { useState, useEffect } from 'react'; // <-- Importar useEffect
+import { useState, useEffect } from 'react'; 
 
 const BACKEND_URL = 'https://backendvrn.onrender.com';
 
@@ -10,7 +10,6 @@ export default function CartModal({ isOpen, onClose }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [hasMounted, setHasMounted] = useState(false); // <-- NUEVO ESTADO
 
-  // Sincronización: Esto solo se ejecuta en el cliente después del primer render
   useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -48,7 +47,6 @@ export default function CartModal({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  // Si no se ha montado aún (estamos en el servidor o cargando), no renderizar la lista
   if (!hasMounted) {
     return (
       <div className="fixed inset-0 z-50 flex justify-end">
@@ -60,13 +58,10 @@ export default function CartModal({ isOpen, onClose }) {
     );
   }
 
-  // Renderizado normal una vez sincronizado
   return (
     <div className="fixed inset-0 z-50 flex justify-end">
-      {/* Fondo oscuro (Overlay) */}
       <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose}></div>
 
-      {/* Panel del Carrito - Usamos la nueva clase 'cart-modal-panel' */}
       <div className="relative w-full max-w-md shadow-xl flex flex-col cart-modal-panel">
         <button onClick={onClose} className="absolute top-4 right-4 modal-close-button">
             &times;
@@ -79,7 +74,6 @@ export default function CartModal({ isOpen, onClose }) {
             <p className="text-gray-500 text-center mt-10">Tu carrito está vacío.</p>
           ) : (
             cart.map((item) => (
-              // Usamos la clase 'cart-item-container'
               <div key={item.id} className="cart-item-container">
                 <div>
                     <h4 className="cart-item-name">{item.nombre}</h4>
@@ -96,7 +90,6 @@ export default function CartModal({ isOpen, onClose }) {
           )}
         </div>
 
-        {/* Footer del Carrito (Total y Pagar) - Usamos 'cart-total-container' */}
         {cart.length > 0 && (
             <div className="cart-total-container"> 
                 <div className="flex justify-between cart-total-text mb-4">

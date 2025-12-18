@@ -1,4 +1,3 @@
-// Este archivo contiene los datos de tus servicios (textos optimizados)
 export const digitalServices = [
     {
         id: 1,

@@ -1,7 +1,6 @@
 // src/app/tienda/page.jsx
-import ProductCard from '../../components/ProductCard'; // Asegúrate que la ruta sea correcta
+import ProductCard from '../../components/ProductCard';
 
-// Datos estáticos de tus productos (Reemplaza los valores con los tuyos reales)
 const products = [
     {
         id: 1,
@@ -24,7 +23,6 @@ const products = [
         archivo: 'LaNubeDeSemillasDeSol.pdf',
         imagenUrl: '/img/nube.png'
     },
-    // Agrega más productos aquí
 ];
 
 export default function TiendaPage() {
@@ -36,7 +34,6 @@ export default function TiendaPage() {
             <div className="products-grid">
 
 
-                {/* Mapeamos los datos a los componentes */}
                 {products.map(product => (
                     <ProductCard
                         key={product.id}
